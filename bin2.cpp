@@ -3,15 +3,15 @@ using namespace std;
 
 #define LEN 10
 
-int binsearch(int val, int arr[]); 
-int recurBinsearch(int midpoint, int val, int arr[]);
+int binsearch(int val, int *arr); 
+int recurBinsearch(int left, int right, int val, int *arr);
 
 int main() {
 	int count = 0;
 	int arr[LEN];
 	int arrVal, val;
 
-	while (count != LEN) {
+	while (count < LEN) {
 		cout << "Initialize index " << count << ": ";
 		cin >> arrVal;
 		arr[count++] = arrVal;
@@ -26,30 +26,18 @@ int main() {
 }
 
 
-int binsearch(int val, int arr[]) {
-	return recurBinsearch(LEN/2, val, arr);
+int binsearch(int val, int *arr) {
+	return recurBinsearch(0, LEN - 1, val, arr);
 }
 
-int recurBinsearch(int midpoint, int val, int arr[]) {
-	int newMidpoint;
+int recurBinsearch(int left, int right, int val, int *arr) {
+	int splitIndex  = left + (right - left) / 2;
 
-	if (val == arr[midpoint]) 
-		return midpoint;
+	if (val == arr[splitIndex]) 
+		return splitIndex;
 	
-	if (val < arr[midpoint]) {
-		newMidpoint = midpoint - (midpoint/2);
+	return val < arr[splitIndex] ? 
+		recurBinsearch(left, splitIndex, val, arr) :
+		recurBinsearch(splitIndex, right, val); 
+}
 
-		if (midpoint == newMidpoint) 
-			return -1;
-		else
-			return recurBinsearch(newMidpoint, val, arr);
-	}	
-	else {
-		newMidpoint = midpoint + (midpoint/2);
-		
-		if (midpoint == newMidpoint)
-			return -1;
-		else
-			return recurBinsearch(newMidpoint, val, arr);
-	}
-} 
