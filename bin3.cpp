@@ -30,16 +30,9 @@ int main() {
 int binsearch(int val, int* arr) {
 	int splitIndex = LEN/2;
 	
-	for (int changeInIndex = splitIndex/2; splitIndex + changeInIndex != splitIndex; changeInIndex /= 2) {
-		if (val == arr[splitIndex]) 
-			return splitIndex;
+	for (int changeInRange = splitIndex/2; changeInRange != 0 && val != arr[splitIndex]; changeInRange /= 2) 
+		splitIndex += (val < arr[splitIndex] ? -changeInRange : changeInRange);
 	
-		if (val < arr[splitIndex]) 
-			splitIndex -= changeInIndex;
-		else
-			splitIndex += changeInIndex;
-	}
-	if (val == arr[splitIndex])
-            return splitIndex;
-	return -1;
+	return (val == arr[splitIndex] ? splitIndex : -1);
+
 }	
