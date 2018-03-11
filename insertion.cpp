@@ -34,17 +34,16 @@ void insertionSort(int* arr) {
         
 	//i checks through each value in the array to see if it should be placed elsewhere
     for (int i = 1; i <= LEN - 1; i++) {
-		//j checks all values of the array less than i to see if they should be swapped:
-		//k keeps track of the original i value
-        for (int j = i - 1, k = i; j >= 0; j--, k--) {
+		//j checks all values of the array less than i to see if they should be swapped
+        for (int j = i - 1; j >= 0; j--) {
             
 			//if incorrect order, swap
-            if (arr[j] > arr[k]) {
+            if (arr[j] > arr[j + 1]) {
                 int temp;
         
                 temp = arr[j];
-                arr[j] = arr[k];
-                arr[k] = temp;
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
             }
 			//else, proper location found, exit loop
             else
