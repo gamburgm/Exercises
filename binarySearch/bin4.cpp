@@ -18,7 +18,7 @@ int main() {
 		arr[count++] = arrVal;
 	}
 
-	int right = ARRAY_LEN(arr);
+	int right = ARRAY_LEN(arr) - 1;
 
 	cout << "What value are you searching for? ";
 	cin >> val;
@@ -42,11 +42,12 @@ int binsearch(int* arr, int val, int right) {
 
 	int halfArr[newArrSize];
 	
-	int shiftInIdx = (val < arr[middle] ? 0 : newArrSize);
+	int shiftInIdx = (val < arr[middle] ? 0 : right - middle);
 
 	val < arr[middle] ? memcpy(halfArr, arr, sizeof(halfArr)) : memcpy(halfArr, &arr[middle + 1], sizeof(halfArr));
 
 	int newRight = ARRAY_LEN(halfArr) - 1;
+
 	int foundIdx = binsearch(halfArr, val, newRight);
 
 	return (foundIdx < 0 ? -1 : foundIdx + shiftInIdx); 
