@@ -53,7 +53,7 @@ void quickSort(int* arr, int left, int right) {
 		}
 	}
 
-	quickSort(arr, 0, middle - 1);
+	quickSort(arr, left, middle - 1);
 	quickSort(arr, middle + 1, right);
 }
 
