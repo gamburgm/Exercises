@@ -52,6 +52,7 @@ void quickSort(int* arr, int left, int right) {
 			}
 		}
 	}
+	swap(arr + middle, arr + pivot);
 
 	quickSort(arr, left, middle - 1);
 	quickSort(arr, middle + 1, right);
