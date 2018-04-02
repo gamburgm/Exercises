@@ -30,7 +30,7 @@ int main() {
 	cout << "Initial Matrix: " << endl;
 	printMatrix(initMatrix, rows, columns);
 	
-	transpose(initMatrix, finalMatrix, columns, rows);
+	transpose(initMatrix, finalMatrix, rows, columns);
 
 	cout << "Final Matrix: " << endl;
 	printMatrix(finalMatrix, columns, rows);
@@ -49,14 +49,12 @@ void transpose(Matrix& init, Matrix& fin, int rows, int columns) {
 
 
 void printMatrix(Matrix& matrix, int rows, int columns) {
-	int idx = 0;
-
-	for (int val : matrix) {
-		cout << "[" << matrix.at(idx) << "]";
-		idx++;	
-		if (idx % columns == 0) 
-			cout << "\n";	
-	}	
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < columns; j++) {
+			cout << "[" << matrix[i * columns + j] << "]";
+		}
+		cout << endl;
+	}
 }	
 
 
