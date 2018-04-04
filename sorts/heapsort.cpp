@@ -20,7 +20,6 @@ int main() {
 		printf("Initialize index %d in array: ", i);
 		cin >> x;
 		arr[i] = x;
-		printf("\n");
 	}
 
 	printf("Original Array:\n");
@@ -38,7 +37,7 @@ int main() {
 }
 
 void buildHeap(int* arr) {
-	for (int i = 0; i < LEN; i++) 
+	for (int i = 1; i < LEN; i++) 
 		upheap(arr, i);
 }
 
@@ -47,12 +46,10 @@ void upheap(int* arr, int valIdx) {
 		return;
 
 	int parentIdx = (valIdx - 1) / 2;
-	if (arr[valIdx] >= arr[parentIdx]) {
+	if (arr[valIdx] > arr[parentIdx]) {
 		swap(arr[valIdx], arr[parentIdx]);
 		upheap(arr, parentIdx);
 	}
-	else 
-		return;
 }
 
 void heapsort(int* arr) {
@@ -60,22 +57,27 @@ void heapsort(int* arr) {
 		int maxIdx = LEN - 1 - i;
 		
 		swap(arr[0], arr[maxIdx]);
-		downheap(arr, 0, maxIdx);
+		downheap(arr, 0, maxIdx - 1);
 	}
 }	
 
 void downheap(int* arr, int valIdx, int maxIdx) {
-	int biggestChildIdx = (arr[(2 * valIdx) + 1] > arr[(2 * valIdx) + 2] ? 2 * valIdx + 1 : 2 * valIdx + 2); 
+	int leftChildIdx = (2 * valIdx) + 1;
+	int rightChildIdx = (2 * valIdx) + 2;
+	int biggestChildIdx;
 
-	if (biggestChildIdx >= maxIdx) 
+	if (leftChildIdx > maxIdx)
 		return;
+
+	if (rightChildIdx > maxIdx)
+		biggestChildIdx = leftChildIdx;
+	else
+		biggestChildIdx = (arr[leftChildIdx] > arr[rightChildIdx] ? leftChildIdx : rightChildIdx);		
 
 	if (arr[valIdx] < arr[biggestChildIdx]) {
 		swap(arr[valIdx], arr[biggestChildIdx]);
 		downheap(arr, biggestChildIdx, maxIdx);
 	}
-	else
-		return;
 } 
 
 void swap(int* valOne, int* valTwo) {
